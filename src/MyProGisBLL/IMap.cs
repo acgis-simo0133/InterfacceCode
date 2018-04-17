@@ -8,8 +8,9 @@ namespace MyGisBLL
     public interface IMap
     {
         string Name { get; set; }
-        ILayer[] Layers { get; }
+        List<ILayer> Layers { get; }
         int LayerCount { get; }
+        void GetLayer(string layerName);
         void AddLayer(ILayer layer);
         void RemoveLayer(int index);
     }

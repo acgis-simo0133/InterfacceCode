@@ -32,7 +32,7 @@ namespace MyProGisBLLTests
             IMap map = new Map();
             map.AddLayer(GetFeatureLayer("layer1", @"C:\data\layer1.shp"));
             map.AddLayer(GetFeatureLayer("layer2", @"C:\data\layer2.shp"));
-            Assert.AreEqual(2, map.Layers.Length);
+            Assert.AreEqual(2, map.Layers.Count);
         }
 
         private IFeatureLayer GetFeatureLayer(string name, string featureclass)
@@ -42,5 +42,23 @@ namespace MyProGisBLLTests
             flayer.Name = name;
             return flayer;
         }
+
+        [TestMethod]
+        public void GetLayer()
+        {
+            IMapManager mgr = new MapDocument();
+            IMapDocument doc = (IMapDocument)mgr;
+            IMap map = new Map();
+            ILayer layer = new Layer();
+            layer.Name = "lyr1";
+            ILayer layer2 = new Layer();
+            layer2.Name = "lyr2";
+            map.AddLayer(layer);
+            map.AddLayer(layer2);
+            IMap layerActual = map.GetLayer("lyr2");
+            Assert.AreEqual("lyr2", layerActual.Name);
+        }
+
+
     }
 }
